@@ -1,35 +1,52 @@
-import { APIRoute } from '../const';
+import { toast } from 'react-toastify';
+
 import { adaptPointToClient, adaptPointToServer } from '../services/adapters';
 import { Destination, Offer, Point, ServerPoint, ThunkActionResult } from '../types/types';
+import { makeNewPoints } from '../utils/util';
 import { loadDestinations, loadOffers, loadPoints, setDisplayPoints } from './actions';
+import { APIRoute } from '../const';
 
-const makeNewPoints = (newPoint: Point, oldPoints: Point[]): Point[] => {
-  const index = oldPoints.findIndex((item) => item.id === newPoint.id);
-  if (index === -1) {
-    return [...oldPoints, newPoint];
-  }
 
-  return [...oldPoints.slice(0, index), newPoint, ...oldPoints.slice(index + 1)];
-};
+enum ErrorMessage {
+  FetchPointsAction = 'unable to upload events',
+  FetchOffersAction = 'unable to upload offers',
+  FetchDestinationsAction = 'unable to upload destinations',
+  PutEditPointAction = 'unable to change the event',
+  PostNewPointAction = 'unable to add new event',
+  DeletePointAction = 'unable to remove the events',
+  ChangeFavoriteStatusAction = 'unable to change status the event',
+}
 
 export const fetchPointsAction = (): ThunkActionResult =>
   async(dispatch, _getState, api) => {
-    const {data} = await api.get<ServerPoint[]>(APIRoute.Points);
-    const clientPoints = data.map((point) => adaptPointToClient(point));
-    dispatch(loadPoints(clientPoints));
+    try {
+      const {data} = await api.get<ServerPoint[]>(APIRoute.Points);
+      const clientPoints = data.map((point) => adaptPointToClient(point));
+      dispatch(loadPoints(clientPoints));
+    } catch {
+      toast.error(ErrorMessage.FetchPointsAction);
+    }
   };
 
 
 export const fetchOffersAction = (): ThunkActionResult =>
   async(dispatch, _getState, api) => {
-    const {data} = await api.get<Offer[]>(APIRoute.Offers);
-    dispatch(loadOffers(data));
+    try {
+      const {data} = await api.get<Offer[]>(APIRoute.Offers);
+      dispatch(loadOffers(data));
+    } catch {
+      toast.error(ErrorMessage.FetchOffersAction);
+    }
   };
 
 export const fetchDestinationsAction = (): ThunkActionResult =>
   async(dispatch, _getState, api) => {
-    const {data} = await api.get<Destination[]>(APIRoute.Destinations);
-    dispatch(loadDestinations(data));
+    try {
+      const {data} = await api.get<Destination[]>(APIRoute.Destinations);
+      dispatch(loadDestinations(data));
+    } catch {
+      toast.error(ErrorMessage.FetchDestinationsAction);
+    }
   };
 
 type PutEditPoint = {point: Point, closeSave: () => void, setErrorForm: (status: boolean) => void, unBlock: () => void}
@@ -48,6 +65,7 @@ export const putEditPointAction = ({point, closeSave, setErrorForm, unBlock}: Pu
       setErrorForm(true);
       setTimeout(() => setErrorForm(false), 1000);
       unBlock();
+      toast.error(ErrorMessage.PutEditPointAction);
     }
   };
 
@@ -66,6 +84,7 @@ export const postNewPointAction = ({point, closeSave, setErrorForm, unBlock}: Pu
       setErrorForm(true);
       setTimeout(() => setErrorForm(false), 1000);
       unBlock();
+      toast.error(ErrorMessage.PostNewPointAction);
     }
   };
 
@@ -85,6 +104,7 @@ export const deletePointAction = ({id, unBlock, setErrorForm}: DeletePoint): Thu
       unBlock();
       setErrorForm(true);
       setTimeout(() => setErrorForm(false), 1000);
+      toast.error(ErrorMessage.DeletePointAction);
     }
   };
 
@@ -103,5 +123,6 @@ export const changeFavoriteStatusAction = ({point, setErrorForm} : ChangeStatusP
     } catch {
       setErrorForm(true);
       setTimeout(() => setErrorForm(false), 1000);
+      toast.error(ErrorMessage.ChangeFavoriteStatusAction);
     }
   };

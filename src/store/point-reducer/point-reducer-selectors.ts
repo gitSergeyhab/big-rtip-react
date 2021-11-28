@@ -2,6 +2,7 @@ import { createSelector } from 'reselect';
 import { OfferOption, Point, State } from '../../types/types';
 import { ReducerName } from '../root-reducer';
 
+
 const sumOfferPrices = (offers: OfferOption[]) => offers.reduce((acc, elem) => acc + elem.price , 0);
 
 const field = ReducerName.Point;

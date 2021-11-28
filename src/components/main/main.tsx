@@ -1,6 +1,7 @@
-import { Point } from '../../types/types';
 import Sort from '../sort/sort';
 import Trip from '../trip/trip';
+import { Point } from '../../types/types';
+
 
 export default function Main({points} : {points: Point[]}): JSX.Element {
 

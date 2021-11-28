@@ -1,8 +1,9 @@
 import { FormEvent } from 'react';
 import { useSelector } from 'react-redux';
-import { ActionTypeEP } from '../../const';
+
 import { getOffers } from '../../store/offer-reducer/offer-reducer-selectors';
 import { ExpPoint, OfferOption, Picture } from '../../types/types';
+import { ActionTypeEP } from '../../const';
 
 
 function EventOffer({selectedOffers, offer, state, setState} : ExpPoint & {selectedOffers: OfferOption[], offer: OfferOption} ):JSX.Element {
@@ -49,15 +50,17 @@ function Img({img} : {img: Picture}): JSX.Element {
 
 
 export default function ExpandedPointDetails({state, setState} : ExpPoint): JSX.Element {
+
   const {destination, offers, type} = state;
 
   const serverOffers = useSelector(getOffers);
+
   const typeOffer = serverOffers.find((offer) => offer.type === type);
   const allOffers = typeOffer ? typeOffer.offers : [];
   const images = destination.pictures.map((item) => <Img img={item} key={item.src}/>);
 
-
   const eventOffers = allOffers.map((offer) => <EventOffer setState={setState} state={state} selectedOffers={offers} offer={offer} key={offer.title}/>);
+
   return (
     <section className="event__details">
       <section className="event__section  event__section--offers">

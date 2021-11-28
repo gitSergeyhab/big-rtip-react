@@ -1,21 +1,12 @@
 import { Point } from '../types/types';
-import { getMinutes, getDateFormat } from './data-time-utils';
+import { getMinutes } from './data-time-utils';
+
 
 type LabelObj = {type: string, sum: number}
 const filterBySum = (object1: LabelObj, object2: LabelObj) => object2.sum - object1.sum;
 
 
-export type FormatFunction = (param: number) => string
-const getPriceFormat: FormatFunction = (price) => `€ ${price}`;
-const getCountFormat: FormatFunction = (val) => `${val}x`;
-const getTimeFormat: FormatFunction = (minutes) => {
-  const hours = Math.floor(minutes / 60);
-  const days = Math.floor(minutes / 60 / 24 );
-  return getDateFormat (days, hours, minutes);
-};
-
 export type CountFunction = (points: Point[], label: string) => number;
-
 const getSumPrice: CountFunction = (points, label) => points.reduce((acc, point) => point.type === label ? acc + point.basePrice : acc, 0);
 const getCountType: CountFunction = (points, label) => points.reduce((acc, point) => point.type === label ? ++acc : acc, 0);
 const getSumTime: CountFunction = (points, label) => points.reduce((acc, point) => point.type === label ? acc + getMinutes(point.dateFrom, point.dateTo) : acc, 0);
@@ -41,13 +32,44 @@ const getGraphData = ({points, countFunction, name, color} : GraphDataArgs): Gra
   };
 };
 
+const getOptions = (textColor: string, text: string ): {scales: any, responsive: boolean, plugins: any} => ({
+  scales: {
+    y: {
+      title: {
+        color: textColor,
+        display: true,
+        text: text,
+        font: {
+          size: 24,
+        },
+      },
+    },
+  },
+
+  responsive: true,
+  plugins: {
+    legend: {
+      position: 'left' as const,
+      labels: {
+        font: {
+          size: 24,
+        },
+        color: 'rgb(0, 99, 132)',
+      },
+    },
+
+    title: {
+      display: true,
+      text: 'Big Trip Stats',
+    },
+  },
+});
+
 export {
-  getPriceFormat,
-  getCountFormat,
-  getTimeFormat,
   getSumPrice,
   getCountType,
   getSumTime,
   getGraphData,
-  getLabels
+  getLabels,
+  getOptions
 };

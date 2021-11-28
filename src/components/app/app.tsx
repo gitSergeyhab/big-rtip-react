@@ -1,20 +1,22 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { AppRoute } from '../../const';
-import { setDisplayPoints } from '../../store/actions';
-import { getDestinations, getDestinationsLoadedStatus } from '../../store/destinations-reducer/destinations-reducer-selectors';
-import { getOffers, getOffersLoadedStatus } from '../../store/offer-reducer/offer-reducer-selectors';
-import { getDisplayEvents, getPointsLoadedStatus } from '../../store/point-reducer/point-reducer-selectors';
+
 import Header from '../header/header';
 import Main from '../main/main';
+import NotFoundPage from '../not-found-page/not-found-page';
+import Spinner from '../spinner/spinner';
 import Stats from '../stats/stats';
+import { setDisplayPoints } from '../../store/actions';
+import { getDestinationsLoadedStatus } from '../../store/destinations-reducer/destinations-reducer-selectors';
+import { getOffersLoadedStatus } from '../../store/offer-reducer/offer-reducer-selectors';
+import { getDisplayEvents, getPointsLoadedStatus } from '../../store/point-reducer/point-reducer-selectors';
+import { AppRoute } from '../../const';
+
 
 function App(): JSX.Element {
 
   const points = useSelector(getDisplayEvents);
-  const offers = useSelector(getOffers);
-  const destination = useSelector(getDestinations);
 
   const arePointLoaded = useSelector(getPointsLoadedStatus);
   const areOffersLoaded = useSelector(getOffersLoadedStatus);
@@ -27,9 +29,8 @@ function App(): JSX.Element {
   }, [dispatch, arePointLoaded, areOffersLoaded, areDestinationsLoaded]);
 
   if (!arePointLoaded || !areOffersLoaded || !areDestinationsLoaded) {
-    return <span>!!!!!!!!!!!!!!!!</span>;
+    return <Spinner/>;
   }
-
 
   return (
     <BrowserRouter>
@@ -41,8 +42,10 @@ function App(): JSX.Element {
         <Route exact path={AppRoute.Stats}>
           <Stats/>
         </Route>
+        <Route>
+          <NotFoundPage/>
+        </Route>
       </Switch>
-
     </BrowserRouter>
   );
 }

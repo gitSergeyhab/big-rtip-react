@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+
 import { destinationReducer } from './destinations-reducer/destinations-reducer';
 import { offerReducer } from './offer-reducer/offer-reducer';
 import { pointReducer } from './point-reducer/point-reducer';
@@ -18,7 +19,6 @@ export const rootReducer = combineReducers({
   [ReducerName.Offer]: offerReducer,
   [ReducerName.Destination]: destinationReducer,
   [ReducerName.Top]: topReducer,
-
 });
 
 export type ReducerState = ReturnType<typeof rootReducer>;

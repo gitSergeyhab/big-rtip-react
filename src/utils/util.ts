@@ -1,10 +1,9 @@
 import dayjs from 'dayjs';
+
 import { KeyboardEvent } from 'react';
-import { FilterType, SortType } from '../const';
 import { Point } from '../types/types.js';
+import { FilterType, SortType } from '../const';
 
-
-const getIndex = (items: any[], wantedItem: any): number => items.findIndex((item) => item.id === wantedItem.id);
 
 const sortByDay = (pointA: Point, pointB: Point): number => dayjs(pointA.dateFrom).diff(dayjs(pointB.dateFrom));
 const sortByTime = (pointA: Point, pointB: Point): number => dayjs(pointA.dateFrom).diff(dayjs(pointA.dateTo)) - dayjs(pointB.dateFrom).diff(dayjs(pointB.dateTo));
@@ -42,11 +41,20 @@ const getDisplayPoints = (points: Point[], sortType : SortType, filterType : Fil
   return getSortedPoints(filtered, sortType);
 };
 
+const makeNewPoints = (newPoint: Point, oldPoints: Point[]): Point[] => {
+  const index = oldPoints.findIndex((item) => item.id === newPoint.id);
+  if (index === -1) {
+    return [...oldPoints, newPoint];
+  }
+
+  return [...oldPoints.slice(0, index), newPoint, ...oldPoints.slice(index + 1)];
+};
+
 export {
   sortByDay,
-  getIndex,
   capitalize,
   isOnline,
   compareWithEscape,
-  getDisplayPoints
+  getDisplayPoints,
+  makeNewPoints
 };

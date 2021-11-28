@@ -1,7 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { FilterType, Page } from '../../const';
+
 import { setDisplayPoints, setFilterType } from '../../store/actions';
 import { getPage } from '../../store/top-reducer/top-reducer-selectors';
+import { FilterType, Page } from '../../const';
+
 
 function Filter({filter}: {filter: FilterType}): JSX.Element {
 
@@ -27,6 +29,7 @@ function Filter({filter}: {filter: FilterType}): JSX.Element {
     </div>
   );
 }
+
 
 export default function HeaderFilter(): JSX.Element {
 

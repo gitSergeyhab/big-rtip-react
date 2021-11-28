@@ -2,6 +2,7 @@ import { createReducer } from '@reduxjs/toolkit';
 import { Offer } from '../../types/types';
 import { loadOffers } from '../actions';
 
+
 type OfferState = {
   offers: Offer[],
   areOffersLoaded: boolean,

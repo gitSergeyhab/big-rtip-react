@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+
 import { openPoint } from '../../store/actions';
 import { changeFavoriteStatusAction } from '../../store/api-actions';
 import { OfferOption, Point } from '../../types/types';
@@ -17,6 +18,7 @@ function SelectedOffer ({offer}: {offer: OfferOption}): JSX.Element {
   );
 }
 
+
 export default function CollapsedPoint({point}: {point: Point}): JSX.Element {
 
   const {id, basePrice, dateFrom, dateTo, destination, isFavorite, offers, type} = point;
@@ -32,7 +34,6 @@ export default function CollapsedPoint({point}: {point: Point}): JSX.Element {
   const selectedOffers = offers.map((offer) => <SelectedOffer offer={offer} key={offer.title}/>);
 
   const [errorForm, setErrorForm] = useState(false);
-
 
   const dispatch = useDispatch();
 

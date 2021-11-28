@@ -1,11 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { defaultNewPoint, Page } from '../../const';
-import { openPoint, setNewPoint } from '../../store/actions';
-import { getNewPoint } from '../../store/point-reducer/point-reducer-selectors';
-import { getPage } from '../../store/top-reducer/top-reducer-selectors';
+
 import HeaderFilter from '../header-filter/header-filter';
 import HeaderInfo from '../header-info/header-info';
 import HeaderNav from '../header-nav/header-nav';
+import { openPoint, setNewPoint } from '../../store/actions';
+import { getNewPoint } from '../../store/point-reducer/point-reducer-selectors';
+import { getPage } from '../../store/top-reducer/top-reducer-selectors';
+import { defaultNewPoint, Page } from '../../const';
+
 
 export default function Header(): JSX.Element {
 

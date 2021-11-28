@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+
 import { getPoints, getTotalBasePrice, getTotalOfferPrices } from '../../store/point-reducer/point-reducer-selectors';
 import { Point } from '../../types/types';
 import { getMonthAndDay } from '../../utils/data-time-utils';
@@ -46,7 +47,7 @@ export default function HeaderInfo(): JSX.Element {
       </div>
 
       <p className="trip-info__cost">
-    Total: &euro;&nbsp;<span className="trip-info__cost-value">{basePriceTotal + offerPriceTotal}</span>
+        Total: &euro;&nbsp;<span className="trip-info__cost-value">{basePriceTotal + offerPriceTotal}</span>
       </p>
     </section>
   );

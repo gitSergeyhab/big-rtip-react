@@ -1,11 +1,14 @@
 import { MouseEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
-import { AppRoute, Page } from '../../const';
+
 import { setPage } from '../../store/actions';
 import { getPage } from '../../store/top-reducer/top-reducer-selectors';
+import { AppRoute, Page } from '../../const';
+
 
 const ACTIVE_CLASS = 'trip-tabs__btn--active';
+
 
 function PageHref({page}: {page: Page}): JSX.Element {
 
@@ -29,8 +32,8 @@ function PageHref({page}: {page: Page}): JSX.Element {
   );
 }
 
-export default function HeaderNav(): JSX.Element {
 
+export default function HeaderNav(): JSX.Element {
 
   return (
     <div className="trip-controls__navigation">

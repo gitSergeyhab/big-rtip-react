@@ -1,15 +1,14 @@
 import { FormEvent, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { ActionTypeEP, NEW_POINT_ID } from '../../const';
+
 import { openPoint } from '../../store/actions';
 import { getCities, getDestinations } from '../../store/destinations-reducer/destinations-reducer-selectors';
 import { ExpPoint } from '../../types/types';
 import { createFlatPicker, getFullDateTime } from '../../utils/data-time-utils';
 import { Instance } from 'flatpickr/dist/types/instance';
 import { deletePointAction } from '../../store/api-actions';
+import { ActionTypeEP, NEW_POINT_ID } from '../../const';
 
-
-// console.log('teat: ', /^\d+$/.test('2r2'));
 
 const DIGIT = /^\d+$/;
 export const capitalize = (str: string): string => `${str[0].toUpperCase()}${str.slice(1)}`;
@@ -42,6 +41,7 @@ function CloseEventBtn(): JSX.Element {
   );
 }
 
+
 function CancelBtn(): JSX.Element {
 
   const dispatch = useDispatch();
@@ -51,6 +51,7 @@ function CancelBtn(): JSX.Element {
     <button onClick={handleClosePointClick} className="event__reset-btn" type="reset">Cancel</button>
   );
 }
+
 
 function DeleteBtn({id, setErrorForm} : {id: string, setErrorForm: (status: boolean) => void }): JSX.Element {
 
@@ -90,7 +91,6 @@ function EventType({pointType, labelTypeRef, state, setState} : {pointType: stri
     }
   };
 
-
   return (
     <div className="event__type-item">
       <input
@@ -103,6 +103,7 @@ function EventType({pointType, labelTypeRef, state, setState} : {pointType: stri
     </div>
   );
 }
+
 
 function OptionCity({city}: {city: string}) {
   return <option value={city}></option>;
@@ -125,7 +126,6 @@ export default function ExpandedPointHeader({state, setState, setErrorForm, savi
 
   const [errorPrice, setErrorPrice] = useState(false);
   const [errorDest, setErrorDest] = useState(state.id === NEW_POINT_ID);
-
 
   const labelTypeRef = useRef<HTMLLabelElement | null>(null);
   const destinationRef = useRef<HTMLInputElement | null>(null);
@@ -186,7 +186,6 @@ export default function ExpandedPointHeader({state, setState, setErrorForm, savi
       setErrorPrice(true);
     }
   };
-
 
   return (
     <header className="event__header">

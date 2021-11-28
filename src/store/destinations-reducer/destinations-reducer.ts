@@ -2,6 +2,7 @@ import { createReducer } from '@reduxjs/toolkit';
 import { Destination } from '../../types/types';
 import { loadDestinations } from '../actions';
 
+
 type DestinationState = {
   destinations: Destination[],
   areDestinationsLoaded: boolean,

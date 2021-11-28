@@ -1,7 +1,9 @@
 import { useSelector } from 'react-redux';
+
+import Event from '../event/event';
 import { getNewPoint } from '../../store/point-reducer/point-reducer-selectors';
 import { Point } from '../../types/types';
-import Event from '../event/event';
+
 
 export default function Trip({points} : {points: Point[]}):JSX.Element {
 

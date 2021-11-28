@@ -1,5 +1,6 @@
 import { Point, ServerPoint } from '../types/types';
 
+
 export const adaptPointToClient = (point: any): Point => {
   const clientPoint = {
     ...point,

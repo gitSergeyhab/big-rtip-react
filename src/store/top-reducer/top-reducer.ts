@@ -1,6 +1,7 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { Page } from '../../const';
 import { setPage } from '../actions';
+import { Page } from '../../const';
+
 
 type TopState =  {page: Page};
 

@@ -1,14 +1,15 @@
 import { AxiosInstance } from 'axios';
 import { AnyAction } from 'redux';
 import { ThunkAction } from 'redux-thunk';
-import { ActionTypeEP } from '../const';
+
 import { ReducerState } from '../store/root-reducer';
+import { ActionTypeEP } from '../const';
+
 
 export type OfferOption = {
     title: string,
     price: number,
 }
-
 
 export type Offer = {
   type: string,
@@ -50,7 +51,6 @@ export type Point = {
 }
 
 export type ExpPoint = {state: Point, setState: React.Dispatch<{type: ActionTypeEP; payload: any}>}
-
 
 export type State = ReducerState;
 

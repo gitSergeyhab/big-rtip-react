@@ -11,7 +11,7 @@ import { Bar } from 'react-chartjs-2';
 import { useSelector } from 'react-redux';
 
 import { getPoints } from '../../store/point-reducer/point-reducer-selectors';
-import { CountFunction, getGraphData } from '../../utils/stat-utils';
+import { CountFunction, getGraphData, getOptions } from '../../utils/stat-utils';
 
 
 ChartJS.register(
@@ -23,39 +23,6 @@ ChartJS.register(
   Legend,
 );
 
-
-const getOptions = (textColor: string, text: string ) => ({
-  scales: {
-    y: {
-      title: {
-        color: textColor,
-        display: true,
-        text: text,
-        font: {
-          size: 24,
-        },
-      },
-    },
-  },
-
-  responsive: true,
-  plugins: {
-    legend: {
-      position: 'left' as const,
-      labels: {
-        font: {
-          size: 24,
-        },
-        color: 'rgb(0, 99, 132)',
-      },
-    },
-
-    title: {
-      display: true,
-      text: 'Big Trip Stats',
-    },
-  },
-});
 
 type ChartBarType = {countFunction: CountFunction, name: string, color: string, text: string}
 

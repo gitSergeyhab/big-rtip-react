@@ -9,7 +9,6 @@ export const enum APIRoute {
   Destinations = '/destinations',
 }
 
-
 export const defaultNewPoint: Point = {
   basePrice: 0,
   dateFrom: new Date().toISOString(),

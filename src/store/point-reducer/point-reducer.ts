@@ -1,8 +1,10 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { FilterType, SortType } from '../../const';
+
 import { Point } from '../../types/types';
 import { getDisplayPoints } from '../../utils/util';
 import { loadPoints, openPoint, setDisplayPoints, setFilterType, setNewPoint, setSortType } from '../actions';
+import { FilterType, SortType } from '../../const';
+
 
 type PointState = {
   points: Point[],
@@ -40,5 +42,4 @@ export const pointReducer = createReducer(initialState, (builder) => {
     .addCase(setDisplayPoints, (state) => {
       state.displayPoints = getDisplayPoints(state.points, state.sort, state.filter);
     });
-
 });
