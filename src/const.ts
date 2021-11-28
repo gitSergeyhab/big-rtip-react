@@ -58,3 +58,9 @@ export enum AppRoute {
   Main = '/',
   Stats = '/stats',
 }
+
+export enum ChartName {
+  Money = 'Money',
+  Type = 'Type',
+  Time ='Time-Spend',
+}
